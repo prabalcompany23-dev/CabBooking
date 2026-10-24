@@ -1,0 +1,16 @@
+# Secrets & local env
+.env
+.env.local
+*.pem
+*.key
+
+# Python (Book-a-Ride app)
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/*.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp

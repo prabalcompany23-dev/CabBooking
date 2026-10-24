@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Request received{% endblock %}
+{% block content %}
+<h1>Request received</h1>
+<p>Thanks, {{ booking.player_name }}. Our team will contact you on <strong>{{ booking.contact }}</strong> within about <strong>2 hours</strong>.</p>
+<div class="notice">
+  <p><strong>Manual pilot:</strong> this is not instant cab booking. Ops will arrange your ride and send driver details via WhatsApp.</p>
+  <p><strong>Payment:</strong> fare is paid directly to the driver (cash/UPI). Playo does not collect ride payment in this pilot.</p>
+</div>
+<p class="muted">Pickup: {{ ride.pickup_area }} · Request #{{ ride.id }}</p>
+<a class="btn btn-secondary" href="/">Book another venue</a>
+{% endblock %}

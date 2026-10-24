@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Ops queue{% endblock %}
+{% block content %}
+<div class="ops-bar">
+  <h1>Ride request queue</h1>
+  <form method="post" action="/ops/logout"><button type="submit" class="btn btn-secondary">Log out ({{ username }})</button></form>
+</div>
+{% if rides %}
+<table class="queue">
+  <thead>
+    <tr><th>When</th><th>Player</th><th>City</th><th>Sport</th><th>Game</th><th>Pickup</th><th>Status</th><th></th></tr>
+  </thead>
+  <tbody>
+  {% for ride in rides %}
+    {% set b = ride.venue_booking %}
+    <tr>
+      <td>{{ ride.created_at.strftime('%m-%d %H:%M') }}</td>
+      <td>{{ b.player_name }}</td>
+      <td>{{ b.city }}</td>
+      <td>{{ b.sport }}</td>
+      <td>{{ b.game_starts_at.strftime('%m-%d %H:%M') }}</td>
+      <td>{{ ride.pickup_area }}</td>
+      <td><span class="status status-{{ ride.status.value }}">{{ ride.status.value }}</span></td>
+      <td><a href="/ops/requests/{{ ride.id }}">Open</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No ride requests yet.</p>
+{% endif %}
+{% endblock %}

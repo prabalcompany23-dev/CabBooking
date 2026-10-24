@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Continue as guest{% endblock %}
+{% block content %}
+<h1>Continue as guest</h1>
+<p class="muted">Enter your mobile number — no account needed. Pilot: {{ pilot_city }} · {{ pilot_sport }}</p>
+<form method="post" action="/guest" class="form">
+  <label>Mobile number <input name="mobile" type="tel" required maxlength="80" placeholder="e.g. 9876543210" autocomplete="tel"></label>
+  <label>City <input name="city" required value="{{ pilot_city }}"></label>
+  <label>Sport <input name="sport" required value="{{ pilot_sport }}"></label>
+  <label>Venue name <input name="venue_name" required maxlength="200"></label>
+  <label>Game starts (local) <input type="datetime-local" name="game_starts_at" required></label>
+  <label class="checkbox"><input type="checkbox" name="own_vehicle"> I have my own vehicle (no cab needed)</label>
+  <button type="submit" class="btn btn-primary">Confirm venue booking</button>
+</form>
+<p class="muted"><a href="/">Use full form with name</a></p>
+{% endblock %}

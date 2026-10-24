@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Venue booked{% endblock %}
+{% block content %}
+<h1>Venue booked</h1>
+<p><strong>{{ booking.venue_name }}</strong> · {{ booking.city }} · {{ booking.sport }}</p>
+<p>Game: {{ booking.game_starts_at.strftime('%Y-%m-%d %H:%M') }}</p>
+
+{% if ride_eligible %}
+  <p>Need a ride to the venue?</p>
+  <a class="btn btn-primary" href="/bookings/{{ booking.id }}/ride/new">Request cab to venue</a>
+  <a class="btn btn-secondary" href="/">No thanks</a>
+{% elif booking.own_vehicle %}
+  <p class="muted">Ride request not shown — you indicated own vehicle.</p>
+  <a class="btn btn-secondary" href="/">Done</a>
+{% else %}
+  <p class="muted">Ride request is not available outside the pilot city/sport.</p>
+  <a class="btn btn-secondary" href="/">Done</a>
+{% endif %}
+{% endblock %}

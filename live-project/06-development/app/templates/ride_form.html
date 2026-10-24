@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Request cab{% endblock %}
+{% block content %}
+<h1>Request cab to venue</h1>
+<p>{{ booking.venue_name }} · {{ booking.game_starts_at.strftime('%Y-%m-%d %H:%M') }}</p>
+<form method="post" action="/bookings/{{ booking.id }}/ride/new" class="form">
+  <label>Player name <input value="{{ booking.player_name }}" disabled></label>
+  <label>Contact <input value="{{ booking.contact }}" disabled></label>
+  <label>Pickup area / landmark <input name="pickup_area" required maxlength="200" placeholder="e.g. Koramangala 5th Block"></label>
+  <button type="submit" class="btn btn-primary">Submit ride request</button>
+</form>
+{% endblock %}

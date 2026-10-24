@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Request #{{ ride.id }}{% endblock %}
+{% block content %}
+<p><a href="/ops/queue">&larr; Back to queue</a></p>
+<h1>Request #{{ ride.id }}</h1>
+<p>Status: <span class="status status-{{ ride.status.value }}">{{ ride.status.value }}</span></p>
+<ul class="detail">
+  <li>Player: {{ booking.player_name }} ({{ booking.contact }})</li>
+  <li>Venue: {{ booking.venue_name }}, {{ booking.city }}</li>
+  <li>Game: {{ booking.game_starts_at.strftime('%Y-%m-%d %H:%M') }}</li>
+  <li>Pickup: {{ ride.pickup_area }}</li>
+</ul>
+<p class="muted">Send driver details via WhatsApp on your phone, then update status below.</p>
+<form method="post" action="/ops/requests/{{ ride.id }}/status" class="form">
+  <label>Ops notes (optional) <textarea name="ops_notes" rows="3">{{ ride.ops_notes or '' }}</textarea></label>
+  <div class="actions">
+    <button type="submit" name="action" value="whatsapp_sent">Mark WhatsApp sent</button>
+    <button type="submit" name="action" value="fulfilled" class="btn-primary">Mark fulfilled</button>
+    <button type="submit" name="action" value="declined" class="btn-danger">Mark declined</button>
+  </div>
+</form>
+{% endblock %}
